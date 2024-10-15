@@ -43,7 +43,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "tailwindcss": "^3.4.13"
-  }
+ "devDependencies": {
+  "@babel/plugin-proposal-private-property-in-object": "version_number"
+}
 }
