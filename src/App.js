@@ -1,13 +1,13 @@
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls, Text, Line } from "@react-three/drei";
+import { Canvas, useFrame} from "@react-three/fiber";
+import { Text} from "@react-three/drei";
 import { useRef, useState, useEffect } from "react";
-import * as THREE from 'three';
 import ShooterBall from './components/ShooterBall';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import Skills from "./components/Skills"; // Example of a new component
 import Experience from "./components/Experience"; // Another new component
 import Education from "./components/Education"; 
 import Projects from "./components/Projects";
+import PropTypes from 'prop-types';
 
 
 function RandomVelocity() {
@@ -15,13 +15,6 @@ function RandomVelocity() {
 }
 
 const bounds ={ x: 10, y: 5};
-
-// for collision detection
-function detectCollision(ball1, ball2) {
-  const distance = ball1.position.distanceTo(ball2.position);
-  const radiusSum = ball1.geometry.parameters.radius + ball2.geometry.parameters.radius;
-  return distance < radiusSum;
-}
 
 function BallWithText({ position, color, label, onHit }) {
   const mesh = useRef();
@@ -232,6 +225,20 @@ const App = () => {
         <Route path="/Projects" element={<Projects />} />
       </Routes>
     </Router>
-  )
-}
+  );
+};
+
+// Prop validation for MovingBall
+MovingBall.propTypes = {
+  position: PropTypes.arrayOf(PropTypes.number).isRequired,
+  color: PropTypes.string.isRequired
+};
+
+// Prop validation for BallWithText
+BallWithText.propTypes = {
+  position: PropTypes.arrayOf(PropTypes.number).isRequired,
+  color: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onHit: PropTypes.func.isRequired
+};
 export default App;
